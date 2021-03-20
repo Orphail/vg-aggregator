@@ -13,5 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'index')->name('home');
-Route::view('/show', 'show')->name('show');
+//Route::view('/', 'index')->name('home');
+//Route::view('/show', 'show')->name('show');
+
+Route::get('/', 'GamesController@index')->name('games.index');
