@@ -46,5 +46,7 @@
         </div>
     </footer>
     @livewireScripts
+    <script src="/js/app.js"></script>
+    @stack('scripts')
 </body>
 </html>

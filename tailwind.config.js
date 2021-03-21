@@ -6,6 +6,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+            spacing: {
+                '44': '11rem'
+            }
         },
         spinner: (theme) => ({
             default: {

@@ -23,5 +23,8 @@
         "sass-loader": "^8.0",
         "tailwindcss": "^2.0",
         "tailwindcss-spinner": "^1.2.0"
+    },
+    "dependencies": {
+        "progressbar.js": "^1.1.0"
     }
 }

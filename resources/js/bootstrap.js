@@ -16,3 +16,5 @@ import 'alpinejs';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+window.ProgressBar = require('progressbar.js')
