@@ -33,7 +33,7 @@
                                 href="{{ route('games.show', $game['slug']) }}"
                                 class="block hover:bg-gray-700 flex items-center transition ease-in-out duration-150 px-3 py-3"
                                 @if($loop->last)
-                                    @keydown.tab="isVisible = false"
+                                    x-on:keydown.tab="isVisible = false"
                                 @endif
                             >
                                 @if(isset($game['cover']))
