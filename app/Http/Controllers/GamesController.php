@@ -66,17 +66,17 @@ class GamesController extends Controller
         return collect($game)->merge([
             'coverImageUrl' => Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']),
             'genres' => collect($game['genres'])->pluck('name')->implode(', '),
-            'involvedCompanies' => $game['involved_companies'][0]['company']['name'],
+            'involvedCompanies' => isset($game['involved_companies'][0]) ? $game['involved_companies'][0]['company']['name'] : null,
             'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
             'memberRating' => isset($game['rating']) ? round($game['rating']) : '0',
             'criticRating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']) : '0',
-            'trailer' => 'https://youtube.com/embed/' . $game['videos'][0]['video_id'],
-            'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {
+            'trailer' => isset($game['videos'][0]) ? 'https://youtube.com/embed/' . $game['videos'][0]['video_id'] : null,
+            'screenshots' => isset($game['screenshots']) ? collect($game['screenshots'])->map(function ($screenshot) {
                 return [
                     'big' => Str::replaceFirst('thumb', 'screenshot_big', $screenshot['url']),
                     'huge' => Str::replaceFirst('thumb', 'screenshot_huge', $screenshot['url']),
                 ];
-            })->take(9),
+            })->take(9) : null,
             'similarGames' => collect($game['similar_games'])->map(function ($game) {
                 return collect($game)->merge([
                     'coverImageUrl' => isset($game['cover'])
@@ -89,16 +89,16 @@ class GamesController extends Controller
                 ]);
             })->take(6),
             'social' => [
-                'website' => collect($game['websites'])->first(),
-                'instagram' => collect($game['websites'])->filter(function($website) {
+                'website' => isset($game['websites']) ? collect($game['websites'])->first() : null,
+                'instagram' => isset($game['websites']) ? collect($game['websites'])->filter(function($website) {
                     return Str::contains($website['url'], 'instagram');
-                })->first(),
-                'twitter' => collect($game['websites'])->filter(function($website) {
+                })->first() : null,
+                'twitter' => isset($game['websites']) ? collect($game['websites'])->filter(function($website) {
                     return Str::contains($website['url'], 'twitter');
-                })->first(),
-                'facebook' => collect($game['websites'])->filter(function($website) {
+                })->first() : null,
+                'facebook' => isset($game['websites']) ? collect($game['websites'])->filter(function($website) {
                     return Str::contains($website['url'], 'facebook');
-                })->first()
+                })->first() : null
             ]
         ]);
     }
