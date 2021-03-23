@@ -77,7 +77,7 @@ class GamesController extends Controller
                     'huge' => Str::replaceFirst('thumb', 'screenshot_huge', $screenshot['url']),
                 ];
             })->take(9) : null,
-            'similarGames' => collect($game['similar_games'])->map(function ($game) {
+            'similarGames' => isset($game['similar_games']) ? collect($game['similar_games'])->map(function ($game) {
                 return collect($game)->merge([
                     'coverImageUrl' => isset($game['cover'])
                         ? Str::replaceFirst('thumb', 'cover_big', $game['cover']['url'])
@@ -87,7 +87,7 @@ class GamesController extends Controller
                         ? collect($game['platforms'])->pluck('abbreviation')->implode(', ')
                         : null,
                 ]);
-            })->take(6),
+            })->take(6) : null,
             'social' => [
                 'website' => isset($game['websites']) ? collect($game['websites'])->first() : null,
                 'instagram' => isset($game['websites']) ? collect($game['websites'])->filter(function($website) {
